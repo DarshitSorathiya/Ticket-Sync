@@ -1,62 +1,35 @@
-import { useState } from 'react'
-import './App.css'
-import Header from './Header'
-import Footer from './Footer'
-import Post from './Post'
-import Login from './Login'
-import SignUp from './SignUp'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./styles/App.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Home from "./components/Home";
+import Post from "./components/Post";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [activeComponent, setActiveComponent] = useState(null);
-
-
   return (
-    <>
-      <body className=' bg-gray-800'>
-      {/* <Header /> */}
-      <Header setActiveComponent={setActiveComponent} />
-        {activeComponent === "post" && <Post />}
-      
-      <main class="p-6">
-        <h2 class="text-xl font-semibold mb-4 text-white">Available Tickets</h2>
-          {/* ✅ Conditionally Render `Post` Component */}
+    <Router>
+      <div className='bg-gray-800 min-h-screen flex flex-col'>
+        <Header />
 
+        <main className='flex-grow p-6'>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/post' element={<Post />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/signup' element={<SignUp />} />
+            <Route
+              path='*'
+              element={<h2 className='text-white'>Page Not Found</h2>}
+            />
+          </Routes>
+        </main>
 
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {/* <!-- Ticket Card --> */}
-            <div class="bg-white text-gray-900 p-4 rounded-lg shadow-md">
-                <h3 class="text-lg font-bold">Train Name: XYZ Express</h3>
-                <h3 class="text-lg font-bold">Train Number: XXXXX</h3>
-                <p><strong>From:</strong> City A</p>
-                <p><strong>To:</strong> City B</p>
-                <p><strong>Date:</strong> 10 March 2025</p>
-                <p><strong>Time:</strong> 7:30 PM</p>
-                <p><strong>Seats:</strong> 2</p>
-                <p><strong>Seat Type:</strong> Sleeper</p>
-                <p><strong>Contact:</strong> +91 9999999999</p>
-
-                {/* <!-- Actions --> */}
-                <div class="flex gap-4 mt-4">
-                    <button class="bg-blue-600 hover:bg-blue-800 px-4 py-2 rounded-lg text-white">Edit</button>
-                    <button class="bg-red-600 hover:bg-red-800 px-4 py-2 rounded-lg text-white">Remove</button>
-                </div>
-            </div>
-
-            
-            {/* <!-- More tickets can be added dynamically --> */}
-        </div>
-    </main>
-
-      <Footer /> 
-       {/* <Post />   */}
-       {/* <Login />
-       <SignUp /> */}
-
-      </body>
-    </>
-  )
+        <Footer />
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;
