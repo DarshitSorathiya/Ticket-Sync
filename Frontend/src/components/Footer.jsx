@@ -3,7 +3,9 @@ import { Link } from "react-router-dom"; // Import Link for navigation
 
 function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300 p-6 mt-10">
+    <>
+     <hr className=" border-t border-gray-300" />
+    <footer className="bg-gray-900 text-gray-300 p-6">
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {/* About Section */}
         <div>
@@ -46,6 +48,7 @@ function Footer() {
         <p className="text-sm">&copy; 2025 TicketSync. All rights reserved.</p>
       </div>
     </footer>
+    </>
   );
 }
 
